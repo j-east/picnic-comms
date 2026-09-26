@@ -15,6 +15,7 @@ export async function apiRoutes(app: FastifyInstance) {
     return {
       mailbox: config.mailbox,
       connected: gauth.isConnected(),
+      googleConfigured: gauth.isConfigured(),
       lastPollAt: st.lastPollAt ?? null,
       lastPollError: st.lastPollError ?? null,
       counts: {
@@ -97,7 +98,10 @@ export async function apiRoutes(app: FastifyInstance) {
   app.post('/api/digest', async () => ({ written: await maybeWriteDigest(true) }));
 
   // Google connection (John runs this once, signed in as the mailbox)
-  app.get('/oauth/start', async (_req, reply) => reply.redirect(gauth.authUrl()));
+  app.get('/oauth/start', async (_req, reply) => {
+    if (!gauth.isConfigured()) return reply.code(503).send('Google OAuth client is not configured on the server yet');
+    return reply.redirect(gauth.authUrl());
+  });
   app.get<{ Querystring: { code?: string; error?: string } }>('/oauth/callback', async (req, reply) => {
     if (req.query.error || !req.query.code) return reply.code(400).send(`Google said: ${req.query.error ?? 'no code'}`);
     await gauth.handleCallback(req.query.code);

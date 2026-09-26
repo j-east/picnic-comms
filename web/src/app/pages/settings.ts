@@ -19,6 +19,9 @@ import { Api, Contact, Settings, Status, relativeUk } from '../api';
             <button [disabled]="busy()" (click)="digest()">Дайджест зараз</button>
           </div>
           @if (msg()) { <p class="notice">{{ msg() }}</p> }
+        } @else if (!s.googleConfigured) {
+          <p>Пошту ще не під’єднано.</p>
+          <p class="muted small">Джон ще налаштовує доступ до Google. Коли все буде готово, тут з’явиться кнопка.</p>
         } @else {
           <p>Пошту ще не під’єднано.</p>
           <a class="btn btn-accent btn-block" href="/oauth/start">Під’єднати {{ s.mailbox }}</a>

@@ -24,7 +24,7 @@ export interface Thread extends Omit<ThreadSummary, 'messageCount' | 'hasDraft'>
 export interface Contact { email: string; name: string; register: 'formal' | 'friendly'; notesUk: string; lastSeen: string }
 export interface Settings { tone: 'warm-professional' | 'formal' | 'casual'; signatureEn: string; digestHour: number; timezone: string }
 export interface Status {
-  mailbox: string; connected: boolean; lastPollAt: string | null; lastPollError: string | null;
+  mailbox: string; connected: boolean; googleConfigured: boolean; lastPollAt: string | null; lastPollError: string | null;
   counts: { needsReply: number; drafted: number; done: number; low: number };
 }
 

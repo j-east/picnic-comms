@@ -13,9 +13,11 @@ export const config = {
   publicUrl: (process.env.PUBLIC_URL ?? 'http://localhost:3000').replace(/\/$/, ''),
   /** Yeva's login link is PUBLIC_URL/login/<APP_TOKEN> */
   appToken: required('APP_TOKEN'),
+  /** Optional at boot so the app can deploy before the OAuth client exists;
+   *  connecting Gmail is refused until both are set. */
   google: {
-    clientId: required('GOOGLE_CLIENT_ID'),
-    clientSecret: required('GOOGLE_CLIENT_SECRET'),
+    clientId: process.env.GOOGLE_CLIENT_ID ?? '',
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
   },
   mailbox: process.env.MAILBOX ?? 'chic@picnicpartyjacksonville.com',
   openrouter: {

@@ -26,7 +26,12 @@ interface StoredToken {
   expiry_date?: number | null;
 }
 
+export function isConfigured(): boolean {
+  return !!(config.google.clientId && config.google.clientSecret);
+}
+
 function newClient(): OAuth2Client {
+  if (!isConfigured()) throw new Error('GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET are not set');
   return new google.auth.OAuth2(
     config.google.clientId,
     config.google.clientSecret,
