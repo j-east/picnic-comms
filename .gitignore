@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env
+# Yeva's customers' data and credentials never enter the repo
+data/
+*.log
+.DS_Store
+web/.angular/
+web/node_modules/
+web/dist/

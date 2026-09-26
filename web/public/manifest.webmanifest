@@ -1,0 +1,10 @@
+{
+  "name": "Пошта · Picnic Party Jacksonville",
+  "short_name": "Пошта",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#eef1ea",
+  "theme_color": "#eef1ea",
+  "lang": "uk",
+  "icons": []
+}
